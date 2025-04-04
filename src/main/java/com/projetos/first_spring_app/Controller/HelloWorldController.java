@@ -1,10 +1,9 @@
 package com.projetos.first_spring_app.Controller;
 
+import com.projetos.first_spring_app.DTO.UserDTO;
 import com.projetos.first_spring_app.Service.HelloWorldService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
@@ -22,5 +21,10 @@ public class HelloWorldController {
     @GetMapping("/data")
     public HashMap<String, Object> data() {
         return helloWorldService.data("Success");
+    }
+
+    @PostMapping("/{id}")
+    public String postHello(@PathVariable String id, @RequestParam(value="filter", defaultValue = "nenhum") String filter, @RequestBody UserDTO body) {
+        return "Hello World " + body.getNome() + filter;
     }
 }
